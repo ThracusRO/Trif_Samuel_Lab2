@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Trif_Samuel_Lab2.Data;
 using Trif_Samuel_Lab2.Models;
 
-namespace Trif_Samuel_Lab2.Pages.Books
+namespace Trif_Samuel_Lab2.Pages.Authors
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace Trif_Samuel_Lab2.Pages.Books
             _context = context;
         }
 
-        public IList<Book> Book { get;set; } = default!;
+        public IList<Author> Author { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Book = await _context.Book.Include(b => b.Publisher).Include(b => b.Author).ToListAsync();
+            Author = await _context.Author.ToListAsync();
         }
     }
 }

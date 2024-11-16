@@ -17,7 +17,10 @@
                 @Html.DisplayNameFor(model => model.Book[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Book[0].Author)
+                @Html.DisplayNameFor(model => model.Book[0].Author.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Author.LastName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Price)
@@ -28,6 +31,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Publisher.PublisherName)
             </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -37,9 +41,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.LastName)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
@@ -49,6 +56,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Publisher.PublisherName)
             </td>
+            
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
