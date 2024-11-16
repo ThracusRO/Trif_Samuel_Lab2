@@ -38,8 +38,14 @@ namespace Trif_Samuel_Lab2.Pages.Books
             Book = book;
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
 "PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
-"FirstName", "LastName");
+            var authorList = _context.Author.Select(x => new
+            {
+                x.ID,
+                FullName = x.FirstName + " " + x.LastName
+            });
+            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            // ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
+//"FirstName", "LastName"); -ce am gresit
             return Page();
         }
 
