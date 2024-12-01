@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trif_Samuel_Lab2.Data;
 
@@ -11,9 +12,11 @@ using Trif_Samuel_Lab2.Data;
 namespace Trif_Samuel_Lab2.Migrations
 {
     [DbContext(typeof(Trif_Samuel_Lab2Context))]
-    partial class Trif_Samuel_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20241201185146_bookcat")]
+    partial class bookcat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
