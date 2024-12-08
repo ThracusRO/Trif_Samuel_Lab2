@@ -10,7 +10,7 @@ using Trif_Samuel_Lab2.Models;
 
 namespace Trif_Samuel_Lab2.Pages.Books
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BookCategoriesPageModel
     {
         private readonly Trif_Samuel_Lab2.Data.Trif_Samuel_Lab2Context _context;
 
@@ -27,10 +27,13 @@ namespace Trif_Samuel_Lab2.Pages.Books
             // "FirstName", "LastName");
             var authorList = _context.Author.Select(x => new
             {
-                x.ID,
-                FullName = x.FirstName + " " + x.LastName
+                   x.ID,
+                   FullName = x.FirstName + " " + x.LastName
             });
-            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+             ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            var book = new Book();
+            book.BookCategories = new List<BookCategory>();
+            PopulateAssignedCategoryData(_context, book);
             return Page();
         }
 
@@ -38,16 +41,38 @@ namespace Trif_Samuel_Lab2.Pages.Books
         public Book Book { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
+        /* conform model Lab3 seciunea asta trebuia inlocuita
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+           if (!ModelState.IsValid)
+           {
+               return Page();
+           }
 
+           _context.Book.Add(Book);
+           await _context.SaveChangesAsync();
+
+           return RedirectToPage("./Index");
+        } */
+        public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
+        {
+            var newBook = new Book();
+            if (selectedCategories != null)
+            {
+                newBook.BookCategories = new List<BookCategory>();
+                foreach (var cat in selectedCategories)
+                {
+                    var catToAdd = new BookCategory
+                    {
+                        CategoryID = int.Parse(cat)
+                    };
+                    newBook.BookCategories.Add(catToAdd);
+                }
+            }
+            Book.BookCategories = newBook.BookCategories;
             _context.Book.Add(Book);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
         }
     }
