@@ -5,7 +5,7 @@
 namespace Trif_Samuel_Lab2.Migrations
 {
     /// <inheritdoc />
-    public partial class bookcat : Migration
+    public partial class Borrowings3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
