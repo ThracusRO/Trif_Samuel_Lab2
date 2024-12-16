@@ -11,11 +11,11 @@ namespace Trif_Samuel_Lab2.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+          /*  migrationBuilder.DropColumn(
                 name: "AuthorsID",
-                table: "Book");
+                table: "Book");*/
 
-            migrationBuilder.CreateTable(
+         /*   migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -26,7 +26,7 @@ namespace Trif_Samuel_Lab2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.ID);
-                });
+                });*/
 
             migrationBuilder.CreateTable(
                 name: "Member",
@@ -45,7 +45,7 @@ namespace Trif_Samuel_Lab2.Migrations
                     table.PrimaryKey("PK_Member", x => x.ID);
                 });
 
-            migrationBuilder.CreateTable(
+        /*    migrationBuilder.CreateTable(
                 name: "BookCategory",
                 columns: table => new
                 {
@@ -69,7 +69,7 @@ namespace Trif_Samuel_Lab2.Migrations
                         principalTable: "Category",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                });
+                });*/
 
             migrationBuilder.CreateTable(
                 name: "Borrowing",
@@ -96,7 +96,7 @@ namespace Trif_Samuel_Lab2.Migrations
                         principalColumn: "ID");
                 });
 
-            migrationBuilder.CreateIndex(
+          /*  migrationBuilder.CreateIndex(
                 name: "IX_BookCategory_BookID",
                 table: "BookCategory",
                 column: "BookID");
@@ -104,7 +104,7 @@ namespace Trif_Samuel_Lab2.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BookCategory_CategoryID",
                 table: "BookCategory",
-                column: "CategoryID");
+                column: "CategoryID");*/
 
             migrationBuilder.CreateIndex(
                 name: "IX_Borrowing_BookID",
@@ -120,23 +120,23 @@ namespace Trif_Samuel_Lab2.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "BookCategory");
+          /*  migrationBuilder.DropTable(
+                name: "BookCategory");*/
 
             migrationBuilder.DropTable(
                 name: "Borrowing");
 
-            migrationBuilder.DropTable(
-                name: "Category");
+          /*  migrationBuilder.DropTable(
+                name: "Category");*/
 
             migrationBuilder.DropTable(
                 name: "Member");
 
-            migrationBuilder.AddColumn<int>(
+           /* migrationBuilder.AddColumn<int>(
                 name: "AuthorsID",
                 table: "Book",
                 type: "int",
-                nullable: true);
+                nullable: true);*/
         }
     }
 }
