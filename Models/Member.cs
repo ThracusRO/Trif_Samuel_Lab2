@@ -19,8 +19,8 @@ namespace Trif_Samuel_Lab2.Models
         [StringLength(70)]
         public string? Adress { get; set; }
         public string Email { get; set; }
-        //Lab 6 Pas 15
-        [RegularExpression(@"^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Telefonul trebuie sa fie de forma '0722-123-123' sau '0722.123.123' sau '0722 123 123'")]
+        //Lab 6 Pas 15 + sarcina 3 am adaugat ^0 pentru a obliga ca numarul sa inceapa cu 0
+        [RegularExpression(@"^0\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Nr de telefon trebuie sa incepa cu 0 si sa fie de forma '0722-123-123' sau '0722.123.123' sau '0722 123 123'")]
         public string? Phone { get; set; }
         [Display(Name = "Full Name")]
         public string? FullName

@@ -17,6 +17,9 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/Books/Details");
     //Lab6 Pas 11
     options.Conventions.AuthorizeFolder("/Members", "AdminPolicy");
+    //Lab6 Sarcina 1
+    options.Conventions.AuthorizeFolder("/Publishers", "AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Categories", "AdminPolicy");
 });
 builder.Services.AddDbContext<Trif_Samuel_Lab2Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Trif_Samuel_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Trif_Samuel_Lab2Context' not found.")));

@@ -9,6 +9,9 @@ namespace Trif_Samuel_Lab2.Models
      public int ID { get; set; }
      
      [Display(Name = "Book Title")]
+     //Lab 6 Sarcina 2
+     [Required(ErrorMessage = "Titlul cartii este obligatoriu.")]
+     [StringLength(150, MinimumLength = 3, ErrorMessage = "Titlul trebuie sa aiba între 3 si 150 de caractere.")]
      public string Title { get; set; }
 
         //public string Author { get; set; }
