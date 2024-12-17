@@ -23,6 +23,7 @@ namespace Trif_Samuel_Lab2.Pages.Borrowings
         [BindProperty]
         public Borrowing Borrowing { get; set; } = default!;
 
+        
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -30,17 +31,50 @@ namespace Trif_Samuel_Lab2.Pages.Borrowings
                 return NotFound();
             }
 
-            var borrowing =  await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
+            // comentam linia originala: var borrowing =  await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
+            //In loc de linia originala introducem:
+            // ---
+            var borrowing = await _context.Borrowing
+                .Include(b => b.Book)
+                .Include(b => b.Member)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            // ---
+
             if (borrowing == null)
             {
                 return NotFound();
             }
             Borrowing = borrowing;
-           ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
-           ViewData["MemberID"] = new SelectList(_context.Member, "ID", "ID");
-            return Page();
-        }
 
+            // Inlocuim pentru Book details: 
+            // --_
+            // Preluăm numele membrilor și detaliile cărților pentru listele derulante
+            var bookList = _context.Book
+                .Include(b => b.Author)
+                .Select(x => new
+                {
+                    x.ID,
+                    BookDetails = x.Title + " - " + x.Author.LastName + " " + x.Author.FirstName
+                });
+
+            ViewData["BookID"] = new SelectList(bookList, "ID", "BookDetails");
+            // ---
+            // Comentam linia originala: ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
+
+            // Comentam linia originala: ViewData["MemberID"] = new SelectList(_context.Member, "ID", "ID");
+
+            //In loc de MemberID adaugam Member First name si Last name concatenat
+            // ----
+            ViewData["MemberID"] = new SelectList(_context.Member
+            .Select(m => new
+             {
+            m.ID,
+            FullName = m.FirstName + " " + m.LastName
+             }), "ID", "FullName");
+            // ---
+            return Page();
+            }
+        
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
